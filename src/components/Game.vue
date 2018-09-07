@@ -102,11 +102,20 @@ export default {
   },
 
   methods: {
+    gameWon () {
+      switch(this.state[0], this.state[1], this.state[2]) {
+        case 0, 0, 0:
+          alert('Game over!')
+          break
+      }
+    },
     async nextMove () {
       this.probabilities.length = 0
       let array = this.state.slice()
       for (let i = 0; i < 9; i++) {
-        array.splice(i, 1, 1)
+        if (array[i] === .5) {
+          array.splice(i, 1, 1)
+        }
         let res = await axios.post('http://localhost:3000/get-probability', {
           array: array
         })
