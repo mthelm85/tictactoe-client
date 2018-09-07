@@ -116,7 +116,7 @@ export default {
         if (array[i] === .5) {
           array.splice(i, 1, 1)
         }
-        let res = await axios.post('http://localhost:3000/get-probability', {
+        let res = await axios.post('http://localhost:3000/get-result', {
           array: array
         })
         this.probabilities.push(res.data.Result[0])
@@ -130,7 +130,9 @@ export default {
     userMove (n) {
       this.squares[n].O = true
       this.state.splice(n, 1, 0)
-      this.nextMove()
+      setTimeout(() => {
+        this.nextMove()
+      }, 1000)
     }
   }
 }
